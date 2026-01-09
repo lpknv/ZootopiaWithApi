@@ -82,7 +82,7 @@ def main():
     """
     animal_name_input = input("Enter a name of an animal: ")
 
-    animals = fetch_data({"name": animal_name_input})
+    animals = fetch_data(animal_name_input)
 
     if not animals:
         output_animal_html_file(
