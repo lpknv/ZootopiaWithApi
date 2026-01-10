@@ -29,4 +29,16 @@ def fetch_data(animal_name):
         }
     },
     """
-    return requests.get(API_URL, headers=HEADERS, params={"name": animal_name}).json()
+
+    try:
+        response = requests.get(
+            API_URL,
+            headers=HEADERS,
+            params={"name": animal_name}
+        )
+        response.raise_for_status()
+        return response.json()
+
+    except requests.exceptions.RequestException as request_exception:
+        print("Fehler beim API-Aufruf:", request_exception)
+        return []

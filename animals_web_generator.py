@@ -85,40 +85,32 @@ def main():
     animals = fetch_data(animal_name_input)
 
     if not animals:
-        output_animal_html_file(
-            "animals_template.html",
-            "animals.html",
-            {
-                "__REPLACE_SUBTITLE_FILTERED_BY_SKIN_TYPE__":
-                    f"<h2>The animal \"{animal_name_input}\" doesn't exist.</h2>",
-                "__REPLACE_ANIMALS_INFO__": ""
-            }
-        )
+        print(f"Oops! \"{animal_name_input}\" is not a valid animal! Try again...")
+        return
+        
+    skin_type_input = ""
+
+    if len(skin_types(animals)) > 1:
+        show_skin_types(animals)
+        skin_type_input = input("What skin type do you want to use? ")
     else:
+        skin_type_input = skin_types(animals)[0]
+        print(f"Only one skin type available: {skin_type_input}. Autoselecting it for you...")
 
-        skin_type_input = ""
+    if skin_type_input.lower() not in [t.lower() for t in skin_types(animals)]:
+        print("Skin type not found. Try again...")
+        return
 
-        if len(skin_types(animals)) > 1:
-            show_skin_types(animals)
-            skin_type_input = input("What skin type do you want to use? ")
-        else:
-            skin_type_input = skin_types(animals)[0]
-            print(f"Only one skin type available: {skin_type_input}. Autoselecting it for you...")
-
-        if skin_type_input.lower() not in [t.lower() for t in skin_types(animals)]:
-            print("Skin type not found. Try again...")
-            return
-
-        output_animal_html_file(
-            "animals_template.html",
-            "animals.html",
-            {
-                "__REPLACE_SUBTITLE_FILTERED_BY_SKIN_TYPE__":
-                    f"<h2>Animals filtered by skin type: {skin_type_input}</h2>",
-                "__REPLACE_ANIMALS_INFO__":
-                    animals_by_skin_type_serialized(animals, skin_type_input)
-            }
-        )
+    output_animal_html_file(
+        "animals_template.html",
+        "animals.html",
+        {
+            "__REPLACE_SUBTITLE_FILTERED_BY_SKIN_TYPE__":
+                f"<h2>Animals filtered by skin type: {skin_type_input}</h2>",
+            "__REPLACE_ANIMALS_INFO__":
+                animals_by_skin_type_serialized(animals, skin_type_input)
+        }
+    )
 
 
 if __name__ == "__main__":
