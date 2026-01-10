@@ -9,7 +9,7 @@ To install this project, simply clone the repository and install the dependencie
 
 ## Usage
 
-To use this project, run the following command - `python3 main.py`.
+To use this project, run the following command - `python3 animals_web_generator.py`.
 
 ## Contributing
 
