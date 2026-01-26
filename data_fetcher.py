@@ -40,5 +40,5 @@ def fetch_data(animal_name):
         return response.json()
 
     except requests.exceptions.RequestException as request_exception:
-        print("Fehler beim API-Aufruf:", request_exception)
+        print("Error:", request_exception)
         return []

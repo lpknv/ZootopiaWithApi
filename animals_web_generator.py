@@ -70,7 +70,7 @@ def output_animal_html_file(template_path, output_path, replacements):
             file.write(html)
 
         print("Website was successfully generated to the file animals.html!")
-        
+
     except FileNotFoundError as e:
         print(f"Template file not found: {e}")
 
@@ -92,9 +92,8 @@ def main():
     animals = fetch_data(animal_name_input)
 
     if not animals:
-        print(f"Oops! \"{animal_name_input}\" is not a valid animal! Try again...")
         return
-        
+
     skin_type_input = ""
 
     if len(skin_types(animals)) > 1:
